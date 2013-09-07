@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver">
+		</property>
+		<property name="url"
+			value="jdbc:mysql://10.1.32.201:4428/rss?useUnicode=true&amp;characterEncoding=utf-8">
+		</property>
+		<property name="username" value="root"></property>
+		<property name="password" value="123456"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+				<!--新添加 测试阶段 事务自动提交-->
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.connection.autocommit">true</prop>
+
+			</props>
+		</property>
+		
+		<!-- 此处需要修改，添加Hibernate匹配文件 -->
+		<property name="mappingResources">
+			<list>
+				<value>User.hbm.xml
+				</value>
+				<value>FeedItem.hbm.xml
+				</value>
+				<value>Feed.hbm.xml
+				</value>
+				<value>UserItemRelation.hbm.xml
+				</value>
+				<value>UserReadItem.hbm.xml
+				</value>
+			</list>
+		</property> 
+	</bean>
+
+	<bean id="myTransactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="transactionProxy"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
+		abstract="true">
+		<property name="transactionManager">
+			<ref bean="myTransactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="save*">PROPAGATION_REQUIRED</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="find*">PROPAGATION_REQUIRED,readonly
+				</prop>
+				<prop key="get*">PROPAGATION_REQUIRED,readonly
+				</prop>
+				<prop key="attach*">PROPAGATION_REQUIRED</prop>
+				<prop key="merge*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="UserDAO" class="com.rss.dao.UserDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="FeedItemDAO" class="com.rss.dao.FeedItemDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="FeedDAO" class="com.rss.dao.FeedDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="UserItemRelationDAO" class="com.rss.dao.UserItemRelationDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="UserReadItemDAO" class="com.rss.dao.UserReadItemDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<!-- 搜索模块 -->
+	<bean id="SearchAction" class="com.rss.action.search.SearchAction"
+	scope="prototype">
+		<property name="historySearch" ref="HistorySearch" />
+		<property name="feedDAO" ref="FeedDAO"/>
+	</bean>
+	
+	
+	<bean id = "HistorySearch" class = "com.rss.service.search.HistorySearch">
+		<property name="feedItemDAO" ref = "FeedItemDAO"/>
+		<property name="userReadItemDAO" ref = "UserReadItemDAO"/>
+	</bean>
+	
+	<!-- 阅读模块 -->
+	
+	<bean id="ReadService" class="com.rss.service.read.ReadService">
+		<property name="feedItemDAO" ref="FeedItemDAO" />
+		<property name="userItemRelationDAO" ref="UserItemRelationDAO" />
+		<property name="userReadItemDAO" ref="UserReadItemDAO" />
+		<property name="feedDAO" ref="FeedDAO" />
+	</bean>
+	
+	<bean id="readAction" class="com.rss.action.read.ReadAction"
+		scope="prototype">
+		<property name="readService" ref="ReadService" />
+	</bean>
+	
+	<!--  User 注册、登录模块 -->
+	
+	<bean id="loginService" class="com.rss.service.user.LoginService">
+		<property name="userdao" ref="UserDAO" />
+	</bean>
+	<bean id="loginAction" class="com.rss.action.user.LoginAction"
+		scope="prototype">
+		<property name="service" ref="loginService" />
+	</bean>
+	<bean id="logoutAction" class="com.rss.action.user.LogoutAction" scope="prototype">
+  	</bean>
+  	
+  	<bean id="RegisterService" class="com.rss.service.user.RegisterService">
+		<property name="userdao" ref="UserDAO" />
+	</bean>
+  	<bean id="registerAction" class="com.rss.action.user.RegisterAction"
+		scope="prototype">
+		<property name="registerService" ref="RegisterService" />
+	</bean>  
+	<bean id="modifyAction" class="com.rss.action.user.ModifyAction"
+		scope="prototype">
+		<property name="service" ref="modifyService" />
+	</bean>
+	<bean id="modifyService" class="com.rss.service.user.ModifyService">
+		<property name="userdao" ref="UserDAO" />
+	</bean>
+	
+	<!--  表单验证模块 -->
+	
+	<bean id="validateAction" class="com.rss.action.user.ValidateAction" scope="prototype">
+  		<property name="registerService" ref="RegisterService" />
+  	</bean>
+	
+</beans>

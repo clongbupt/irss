@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE struts PUBLIC 
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" 
+    "http://struts.apache.org/dtds/struts-2.1.dtd"> 
+
+<struts>    
+    <package name="modify" extends="logincheck">
+ 		 
+    <action name="modify" >
+            <result>/jsp/user/loginsuccess.jsp</result>
+       </action>
+        <action name="Modify!*" method="{1}" class="modifyAction"> 
+			<!-- 配置系统默认的拦截器 -->
+			<interceptor-ref name="myDefaultStack"></interceptor-ref>
+			<!-- 配置input逻辑视图对应的视图页面 -->
+            <result name="modifyinfosucc">/jsp/user/loginsuccess.jsp</result>
+            <result name="modifypwdsucc">/jsp/user/loginsuccess.jsp</result>
+            <result name="modifypwdfail">/jsp/user/modifypwd.jsp</result>
+    </action> 		 
+    </package>
+</struts>

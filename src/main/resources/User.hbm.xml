@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!--上面四行对所有的hibernate映射文件都相同 -->
+<!-- hibernate-mapping是映射文件的根元素 -->
+<hibernate-mapping> 
+	<class name="com.rss.pojos.User" table="user" catalog="rss" dynamic-insert="true" dynamic-update="true">
+		<id name="userId" type="java.lang.Integer">
+            <column name="userId" length="11" not-null="true"/>
+            <generator class="native"></generator>
+        </id> 
+        <property name="userName" type="java.lang.String">
+            <column name="userName" length="60" >
+                <comment>用户名字</comment>
+            </column> 
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="password" length="60">
+                <comment>密码</comment>
+            </column>
+        </property>
+        <property name="email" type="java.lang.String">
+            <column name="email" length="60">
+                <comment>邮箱</comment>
+            </column>
+        </property>
+        <property name="activate" type="java.lang.Character">
+            <column name="activate" length="1">
+                <comment>是否激活</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

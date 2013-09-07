@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!--上面四行对所有的hibernate映射文件都相同 -->
+<!-- hibernate-mapping是映射文件的根元素 -->
+<hibernate-mapping> 
+	<class name="com.rss.pojos.UserItemRelation" table="user_item_relation" catalog="rss" dynamic-insert="true" dynamic-update="true">
+		<id name="userItemId" type="java.lang.Integer">
+            <column name="userItemId" length="11" not-null="true"/>
+            <generator class="native"></generator>
+        </id> 
+        <property name="userId" type="java.lang.Integer">
+            <column name="userId" length="11">
+                <comment>用户ID</comment>
+            </column> 
+        </property>
+        <property name="feedItemId" type="java.lang.Integer">
+            <column name="feedItemId" length="11">
+                <comment>文章ID</comment>
+            </column>
+        </property>
+        <property name="score" type="java.lang.Float">
+            <column name="score" length="1">
+                <comment>文章得分</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

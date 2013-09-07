@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="objectFactory" value="spring"/>
+    <include file="struts-default.xml" />
+    
+    <!-- 加载默认的 struts2 配置文件 -->
+	<package name="logincheck" extends="struts-default"> 
+		<!-- 定义一个名为 checkLogin 的拦截器 -->
+		<interceptors> 
+			<!-- 定义权限检查拦截器 -->
+			<interceptor name="checkLogin"
+				class="com.rss.interceptor.CheckLoginInterceptor" />
+			<!-- 定义一个包含权限检查的拦截器栈 -->
+			<interceptor-stack name="myDefaultStack">
+				<!-- 定义拦截器栈包含checkLogin拦截器 -->
+				<interceptor-ref name="checkLogin"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<!-- 设置全局 全局默认的拦截器栈-->
+		<default-interceptor-ref name="myDefaultStack"></default-interceptor-ref>
+		<!-- 定义全局Result -->
+		<global-results>
+			<!-- 当返回login视图名时，转入/login.jsp页面 -->
+			<result name="login" type="redirect">read.action</result>
+		</global-results>
+
+	</package>
+	
+    
+    <include file="login.xml" /> 
+    <include file="logout.xml"/>
+    <include file="register.xml" /> 
+    <include file="modify.xml" />
+    <include file="mailinfo.xml" />  
+    <include file="read.xml" />
+    <include file="search.xml" />
+    
+    <!-- 将表单验证独立出来 -->
+    <include file="validate.xml" />
+</struts>

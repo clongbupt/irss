@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!--上面四行对所有的hibernate映射文件都相同 -->
+<!-- hibernate-mapping是映射文件的根元素 -->
+<hibernate-mapping> 
+	<class name="com.rss.pojos.FeedItem" table="feed_item" catalog="rss" dynamic-insert="true" dynamic-update="true">
+		<id name="feedItemId" type="java.lang.Integer">
+            <column name="feedItemId" length="8" not-null="true"/>
+            <generator class="native"></generator>
+        </id>  
+        <property name="feedId" type="java.lang.Integer">
+            <column name="feedId" length="4">
+                <comment>Feed表ID</comment>
+            </column>
+        </property>
+        <property name="feedItemUrl" type="java.lang.String">
+            <column name="feedItemUrl" length="1000">
+                <comment>文章链接</comment>
+            </column>
+        </property>
+        <property name="feedItemTitle" type="java.lang.String">
+            <column name="feedItemTitle" length="100">
+                <comment>文章标题</comment>
+            </column>
+        </property> 
+        <property name="feedItemAuthor" type="java.lang.String">
+            <column name="feedItemAuthor" length="100">
+                <comment>文章作者</comment>
+            </column>
+        </property>
+        <property name="feedItemDescription" type="java.lang.String">
+        	<column name="feedItemDescription" length="100000">
+        		<comment>文章描述去HTML标签</comment>
+        	</column>
+        </property>
+        <property name="feedItemContent" type="java.lang.String">
+        	<column name="feedItemContent" length="100000">
+        		<comment>文章描述含HTML标签</comment>
+        	</column>
+        </property>
+        <property name="feedItemPubDate" type="java.lang.String">
+        	<column name="feedItemPubDate" length="100">
+        		<comment>文章发布时间</comment>
+        	</column>
+        </property>
+        <property name="feedItemCategory" type="java.lang.String">
+        	<column name="feedItemCategory" length="500">
+        		<comment>文章所属分类</comment>
+        	</column>
+        </property>
+        <property name="feedItemPostRank" type="java.lang.Float">
+        	<column name="feedItemPostRank">
+        		<comment>文章的PostRank值</comment>
+        	</column>
+        </property>
+    </class>
+</hibernate-mapping>

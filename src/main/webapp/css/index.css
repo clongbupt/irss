@@ -1,0 +1,339 @@
+@charset "utf-8";
+
+/* ---------------------------------------- Global ------------------------------------------ */
+
+*{ 
+padding: 0px;
+margin: 0px;
+}
+
+body {
+font-family: Arial, Helvetica, Verdana, Sans-serif;
+font-size: 100%;
+line-height: 150%;
+color: #666666;
+background: url("../images/top-bg.gif") repeat-x scroll center top #DDDDDD;
+}
+
+a{
+	color:#0196E3;
+	text-decoration:none;
+}
+
+input,select,textarea {
+    border: 1px solid #CCCCCC;
+    border-radius: 10px 10px 10px 10px;
+	-moz-border-radius:10px;
+    color: #666666;
+    font-family: Helvetica,Arial,sans-serif;
+    padding: 5px;
+}
+
+/* ---------------------------------------- =Layout ------------------------------------------ */
+
+
+/* ---------------------------------------- =Header ------------------------------------------ */
+
+#logo{
+	padding-top:28px;
+	text-align:center;
+	height:70px;
+	position:relative;
+}
+
+#userForm{
+	position:absolute;
+    top:10px;
+	right:20px;
+}
+
+#userForm a{
+	color:#0196E3;
+	text-decoration:none;
+}
+
+#userForm a:hover{
+	color:#FF9900;
+	text-decoration:underline;
+}
+
+#userForm span{
+	color:#fff;
+}
+
+#searchForm {
+	position:absolute;
+	top:40px;
+	right:20px;
+}
+
+#searchForm input{
+	padding:0px;
+}
+
+#searchForm .button{
+    background:url("../images/search-white.png") no-repeat #4D90EF ;
+	border-radius: 2px 2px 2px 2px;
+    cursor: pointer;
+    height: 21px;
+    line-height: 27px;
+    min-width: 21px;
+}
+
+/* ---------------------------------------- =Content ------------------------------------------ */
+
+#content{
+    /* padding: 15px; */
+	margin-top:20px;
+}
+
+#content .content_box{
+	border-radius: 10px 10px 10px 10px;
+	-moz-border-radius: 10px 10px 10px 10px;
+    background: url("images/bg_comment.png") repeat-x scroll left bottom #FFFFFF;
+    border: 0 solid #E3E3E3;
+    color: #888888;
+    overflow: hidden;
+	padding:15px;
+}
+
+#content h2{
+	text-align:center;
+}
+
+#content .entry{
+	margin-top:20px;
+	text-indent: 2em;
+}
+
+#content .post_info_t{
+	text-align:center;
+}
+
+#content img{
+	display:block;
+	margin:0 auto;
+}
+
+#content a{
+	color:#0196E3;
+	text-decoration:none;
+}
+
+#content a:hover{
+	color:#FF9900;
+	text-decoration:underline;
+}
+
+#content strong{
+	color:#000;
+}
+
+/* ---------------------------------------- =Search ------------------------------------------ */
+
+#search{
+    /* padding: 15px; */
+	margin-top:20px;
+}
+
+#search .search_box{
+	float:left;
+	width:100%;
+	margin-bottom:20px;
+}
+
+#search .search_box .search_left{
+	float:left;
+	margin-left:30px;
+}
+
+#search .search_box .search_right{
+	float:right;
+	margin-right:30px;
+}
+
+#search .content_box{
+	border-radius: 10px 10px 10px 10px;
+	-moz-border-radius: 10px 10px 10px 10px;
+    background: url("images/bg_comment.png") repeat-x scroll left bottom #FFFFFF;
+    border: 0 solid #E3E3E3;
+    color: #888888;
+    overflow: hidden;
+	padding:15px;
+	margin-bottom:20px;
+}
+
+#search h2,.inline h2{
+	text-align:center;
+}
+
+#search .entry, .inline .entry{
+	margin-top:20px;
+	text-indent: 2em;
+}
+
+.inline .entry{
+	padding:0 10px;
+}
+
+
+#search img, .inline img{
+	display:block;
+	margin:0 auto;
+}
+
+#search a,.inline a{
+	color:#0196E3;
+	text-decoration:none;
+}
+
+#search a:hover,.inline a:hover{
+	color:#FF9900;
+	text-decoration:underline;
+}
+
+#search strong,.inline strong{
+	color:#000;
+}
+
+
+/* ---------------------------------------- =Login ------------------------------------------ */
+
+#login h2,#login form,#login .content_box{
+	border-radius: 10px 10px 10px 10px;
+	-moz-border-radius: 10px 10px 10px 10px;
+    background: url("images/bg_comment.png") repeat-x scroll left bottom #FFFFFF;
+    border: 0 solid #E3E3E3;
+    color: #888888;
+    overflow: hidden;
+	padding:15px;
+}
+
+#login h2{
+	margin-top:20px;
+	text-align:center;
+}
+
+#login p{
+	float:left;
+	height:30px;
+}
+
+/* 布局一：右对齐*/
+#login p.label{
+   	width:37%;
+   	padding-right:5px;
+   	text-align:right;
+}
+   
+#login p.input{
+   	width:25%;
+}
+
+#login p.status{
+	width:37%;
+}
+   
+#login p.submit{
+   	float:left;
+   	margin-left:330px;
+}
+
+#login p.submit input{
+	background-color:#39f;
+	color:#fff;
+}
+
+
+/* ---------------------------------------- =Validate ------------------------------------------ */
+#login .status {
+vertical-align: top;
+width: 246px;
+white-space: nowrap;
+} 
+
+#login label.error {
+background:url("../images/unchecked.gif") no-repeat 0px 0px;
+padding-left: 16px;
+padding-bottom: 2px;
+font-weight: bold;
+color: #EA5200;
+}
+#login label.checked {
+background:url("../images/checked.gif") no-repeat 0px 0px;
+} 
+
+/* 保证文字与表单居中对齐 */
+#login label{
+	display: block;
+    margin-top: 6px;
+}
+
+/* ---------------------------------------- =Register Success ------------------------------------------ */
+#success {
+	border-radius: 10px 10px 10px 10px;
+	-moz-border-radius: 10px 10px 10px 10px;
+    background: url("images/bg_comment.png") repeat-x scroll left bottom #FFFFFF;
+    border: 0 solid #E3E3E3;
+    color: #888888;
+    overflow: hidden;
+	padding:15px;
+	margin-top:20px;
+	text-align:center;
+}
+
+
+/* ---------------------------------------- =Sidebar ------------------------------------------ */
+
+#sidebar{
+	margin-right: -485px;
+    position: fixed;
+	top:50%;
+    right: 50%;
+    width: 15px;
+}
+
+
+#sidebar a{
+	display:block;
+	width:160px;
+	height:40px;
+	margin-bottom:20px;
+}
+
+#sidebar a.like{
+	background:#FFF url(../images/icron.png) 0 0 no-repeat;
+}
+
+#sidebar a.like:hover{
+	background:#FFF url(../images/icron.png) 0 -50px no-repeat;
+}
+
+#sidebar a.hate{
+	background:#FFF url(../images/icron.png) 0 -110px no-repeat;
+}
+
+#sidebar a.hate:hover{
+	background:#FFF url(../images/icron.png) 0 -170px no-repeat;
+}
+
+#sidebar a.next{
+	background:#FFF url(../images/icron.png) 0 -240px no-repeat;
+}
+
+#sidebar a.next:hover{
+	background:#FFF url(../images/icron.png) 0 -290px no-repeat;
+}
+
+#sidebar .hate{
+}
+
+#sidebar .next{
+}
+
+/* ---------------------------------------- =Footer ------------------------------------------ */
+
+#footer{
+	margin-top:10px;
+	text-align:center;
+}
